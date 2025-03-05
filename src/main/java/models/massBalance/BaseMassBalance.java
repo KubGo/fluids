@@ -1,26 +1,28 @@
 package models.massBalance;
 
+import models.units.MassFlowRate;
+
 public class BaseMassBalance implements MassBalanceInterface{
 
-    private double inletMassFlowRate;
-    private double outletMassFlowRate;
+    private MassFlowRate inletMassFlowRate;
+    private MassFlowRate outletMassFlowRate;
 
     public BaseMassBalance(double massFlowRate) {
-        this.inletMassFlowRate = massFlowRate;
-        this.outletMassFlowRate = -massFlowRate;
+        this.inletMassFlowRate = new MassFlowRate(massFlowRate);
+        this.outletMassFlowRate = new MassFlowRate(-massFlowRate);
     }
 
     @Override
     public double getInletMassFlowRate() {
-        return this.inletMassFlowRate;
+        return this.inletMassFlowRate.getValue();
     }
 
     @Override
     public double getOutletMassFlowRate() {
-        return this.outletMassFlowRate;
+        return this.outletMassFlowRate.getValue();
     }
     public void updateMassFlowRate(double massFlowRate){
-        inletMassFlowRate = massFlowRate;
-        outletMassFlowRate = -massFlowRate;
+        this.inletMassFlowRate.setValue(massFlowRate);
+        this.outletMassFlowRate.setValue(-massFlowRate);
     }
 }
